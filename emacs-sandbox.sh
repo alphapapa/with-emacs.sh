@@ -70,10 +70,10 @@ function usage {
 $0 [OPTIONS] [EMACS-ARGS]
 
 Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
-specified, one is made with "mktemp -d".
+specified, one is made with "mktemp -d" and removed when Emacs exits.
 
 Options
-  --debug     Show debug information.
+  --debug     Show debug information and don't remove temp directory.
   -h, --help  This.
   --          Optionally used to separate script arguments from
               Emacs arguments.
@@ -86,6 +86,22 @@ Options
   -R, --no-refresh-packages  Don't refresh package lists.
 
 EOF
+}
+
+function cleanup {
+    # Remove temporary paths (${temp_paths[@]}).
+    for path in "${temp_paths[@]}"
+    do
+        if [[ $debug ]]
+        then
+            debug "Debugging enabled: not deleting temporary path: $path"
+        elif [[ -r $path ]]
+        then
+            rm -rf "$path"
+        else
+            debug "Temporary path doesn't exist, not deleting: $path"
+        fi
+    done
 }
 
 # * Args
@@ -136,14 +152,17 @@ debug "Remaining args: ${rest[@]}"
 
 # * Main
 
+trap cleanup EXIT INT TERM
+
 # Check or make user-emacs-directory.
 if [[ $user_dir ]]
 then
     # Directory given as argument: ensure it exists.
     [[ -d $user_dir ]] || die "Directory doesn't exist: $user_dir"
 else
-    # Not given: make temp directory.
+    # Not given: make temp directory, and delete it on exit.
     user_dir=$(mktemp -d) || die "Unable to make temp dir."
+    temp_paths+=("$user_dir")
 fi
 
 # Make argument to load init file if it exists.

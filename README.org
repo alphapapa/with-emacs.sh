@@ -30,10 +30,10 @@ Copy =emacs-sandbox.sh= into your =PATH= (or don't, and run it from wherever you
   emacs-sandbox.sh [OPTIONS] [EMACS-ARGS]
 
   Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
-  specified, one is made with "mktemp -d".
+  specified, one is made with "mktemp -d" and removed when Emacs exits.
 
   Options
-    --debug     Show debug information.
+    --debug     Show debug information and don't remove temp directory.
     -h, --help  This.
     --          Optionally used to separate script arguments from
                 Emacs arguments.
