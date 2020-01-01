@@ -67,7 +67,7 @@ function die {
 
 function usage {
     cat <<EOF
-emacs-sandbox [OPTIONS] [EMACS-ARGS]
+$0 [OPTIONS] [EMACS-ARGS]
 
 Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
 specified, one is made with "mktemp -d".

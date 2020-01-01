@@ -27,7 +27,7 @@ Copy =emacs-sandbox.sh= into your =PATH= (or don't, and run it from wherever you
 :END:
 
 #+BEGIN_EXAMPLE
-  emacs-sandbox [OPTIONS] [EMACS-ARGS]
+  emacs-sandbox.sh [OPTIONS] [EMACS-ARGS]
 
   Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
   specified, one is made with "mktemp -d".
