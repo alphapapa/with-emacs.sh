@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# * emacs-sandbox.sh --- Run Emacs in a sandbox
+
+# Version: 0.1-pre
+
 # * Commentary
 
 # Run Emacs in a sandbox.  Some code copied from MELPA's Makefile.

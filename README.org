@@ -1,0 +1,85 @@
+#+TITLE: emacs-sandbox.sh
+
+#+PROPERTY: LOGGING nil
+
+# Note: This readme works with the org-make-toc <https://github.com/alphapapa/org-make-toc> package, which automatically updates the table of contents.
+
+This script makes it easy to run Emacs in a clean, sandbox-like configuration, without affecting your personal Emacs configuration.  It's helpful for developing packages, troubleshooting configuration problems, etc.
+
+* Contents                                                         :noexport:
+:PROPERTIES:
+:TOC:      this
+:END:
+-  [[#installation][Installation]]
+-  [[#usage][Usage]]
+-  [[#changelog][Changelog]]
+
+* Installation
+:PROPERTIES:
+:TOC:      0
+:END:
+
+Copy =emacs-sandbox.sh= into your =PATH= (or don't, and run it from wherever you want).
+
+* Usage
+:PROPERTIES:
+:TOC:      0
+:END:
+
+#+BEGIN_EXAMPLE
+  emacs-sandbox [OPTIONS] [EMACS-ARGS]
+
+  Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
+  specified, one is made with "mktemp -d".
+
+  Options
+    --debug     Show debug information.
+    -h, --help  This.
+    --          Optionally used to separate script arguments from
+                Emacs arguments.
+
+    -d, --dir DIR          Use DIR as user-emacs-directory.
+
+    -i, --install PACKAGE      Install PACKAGE.
+    -O, --no-org-repo          Don't use the orgmode.org ELPA repo.
+    -P, --no-package           Don't initialize the package system.
+    -R, --no-refresh-packages  Don't refresh package lists.
+#+END_EXAMPLE
+
+* Changelog
+:PROPERTIES:
+:TOC:      0
+:END:
+
+** 0.1-pre
+
+Initial release.
+
+* Credits
+:PROPERTIES:
+:TOC:      ignore
+:END:
+
+Inspired by and some code copied from [[https://github.com/melpa/melpa][MELPA]]'s Makefile.
+
+* Development
+:PROPERTIES:
+:TOC:      ignore
+:END:
+
+Bug reports, feature requests, suggestions — /oh my/!
+
+* License
+:PROPERTIES:
+:TOC:      ignore
+:END:
+
+GPLv3
+
+# Local Variables:
+# eval: (require 'org-make-toc)
+# before-save-hook: org-make-toc
+# org-export-with-properties: ()
+# org-export-with-title: t
+# End:
+
