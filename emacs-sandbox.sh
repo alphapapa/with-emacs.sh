@@ -30,8 +30,10 @@ org_package_archives_args=(
     --eval "(add-to-list 'package-archives '(\"org\" . \"https://orgmode.org/elpa/\") t)"
 )
 
-package_init_args=(
+package_refresh_args=(
     --eval "(package-refresh-contents)"
+)
+package_init_args=(
     --eval "(package-initialize)"
 )
 
@@ -74,16 +76,17 @@ Options
 
   -d, --dir DIR          Use DIR as user-emacs-directory.
 
-  -i, --install PACKAGE  Install PACKAGE.
-  -O, --no-org-repo      Don't use the orgmode.org ELPA repo.
-  -P, --no-package       Don't initialize the package system.
+  -i, --install PACKAGE      Install PACKAGE.
+  -O, --no-org-repo          Don't use the orgmode.org ELPA repo.
+  -P, --no-package           Don't initialize the package system.
+  -R, --no-refresh-packages  Don't refresh package lists.
 
 EOF
 }
 
 # * Args
 
-args=$(getopt -n "$0" -o d:hi:OP -l dir:,debug,help,install:,no-package,no-org-repo -- "$@") || { usage; exit 1; }
+args=$(getopt -n "$0" -o d:hi:OPR -l dir:,debug,help,install:,no-package,no-org-repo,no-refresh-packages -- "$@") || { usage; exit 1; }
 eval set -- "$args"
 
 while true
@@ -110,12 +113,15 @@ do
         -P|--no-package)
             unset package_init_args
             ;;
+        -R|--no-refresh-packages)
+            unset package_refresh_args
+            ;;
         --)
             # Remaining args (required; do not remove)
             shift
             rest=("$@")
             break
-            ;;
+               ;;
     esac
 
     shift
@@ -152,6 +158,7 @@ emacs_args=(
     "${basic_args[@]}"
     "${package_archives_args[@]}"
     "${org_package_archives_args[@]}"
+    "${package_refresh_args[@]}"
     "${package_init_args[@]}"
     "${install_packages_args[@]}"
     "${rest[@]}"
