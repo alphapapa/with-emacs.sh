@@ -165,6 +165,9 @@ else
     temp_paths+=("$user_dir")
 fi
 
+# Set frame title.
+title_args=(--title "Emacs (sandbox: $user_dir)")
+
 # Make argument to load init file if it exists.
 init_file="$user_dir/init.el"
 [[ -r $init_file ]] && load_init_file=(--load "$init_file")
@@ -172,6 +175,7 @@ init_file="$user_dir/init.el"
 # Prepare args.
 basic_args=(
     --quick
+    "${title_args[@]}"
     --eval "(setq user-emacs-directory (file-truename \"$user_dir\"))"
     --eval "(setq user-init-file (file-truename \"$init_file\"))"
     "${load_init_file[@]}"
