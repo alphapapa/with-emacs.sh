@@ -158,7 +158,12 @@ trap cleanup EXIT INT TERM
 if [[ $user_dir ]]
 then
     # Directory given as argument: ensure it exists.
-    [[ -d $user_dir ]] || die "Directory doesn't exist: $user_dir"
+    if ! [[ -d $user_dir ]]
+    then
+        # Directory doesn't exist: make it and say so.
+        echo "Directory doesn't exist.  Creating it: $user_dir" >&2
+        mkdir "$user_dir" || die "Unable to make directory: $user_dir"
+    fi
 else
     # Not given: make temp directory, and delete it on exit.
     user_dir=$(mktemp -d) || die "Unable to make temp dir."
