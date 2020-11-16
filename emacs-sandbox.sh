@@ -2,6 +2,7 @@
 
 # * emacs-sandbox.sh --- Run Emacs in a sandbox
 
+# URL: https://github.com/alphapapa/emacs-sandbox.sh
 # Version: 0.1-pre
 
 # * Commentary
