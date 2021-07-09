@@ -4,7 +4,15 @@
 
 # Note: This readme works with the org-make-toc <https://github.com/alphapapa/org-make-toc> package, which automatically updates the table of contents.
 
-This script makes it easy to run Emacs in a clean, sandbox-like configuration, without affecting your personal Emacs configuration.  It's helpful for developing packages, troubleshooting configuration problems, etc.
+This script makes it easy to run Emacs with alternative configurations (i.e. not =~/.emacs.d=).  For example, to run Emacs with a configuration stored in =~/new-emacs.d=, simply run:
+
+#+BEGIN_SRC shell
+  $ emacs-sandbox.sh --dir ~/new-emacs.d
+#+END_SRC
+
+It can also use temporary, "sandbox" directories that are automatically created and then removed after Emacs exits: just run =emacs-sandbox.sh= without specifying a directory.
+
+It's helpful for developing packages, troubleshooting configuration problems, trying out alternative configurations, etc.
 
 * Contents                                                         :noexport:
 :PROPERTIES:
@@ -61,6 +69,11 @@ Initial release.
 :END:
 
 Inspired by and some code copied from [[https://github.com/melpa/melpa][MELPA]]'s Makefile.
+
+* Alternatives
+
++  [[https://github.com/plexus/chemacs2][Chemacs2]] is a system of three Elisp files designed to replace your =~/.emacs.d= and switch between "profiles" stored in other directories.  It requires a configuration file pointing to the profiles' directories.  It offers some additional functionality, like setting environment variables per-profile.
+     -  In contrast, =emacs-sandbox.sh= does not replace anything, and it requires no configuration; just run it with a directory of your choice.  It's just a Bash script, so if you want to set an environment variable, use standard tools, like =env=.
 
 * Development
 :PROPERTIES:
