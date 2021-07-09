@@ -68,7 +68,7 @@ function die {
 
 function usage {
     cat <<EOF
-$0 [OPTIONS] [EMACS-ARGS]
+$(basename "$0") [OPTIONS] [EMACS-ARGS]
 
 Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
 specified, one is made with "mktemp -d" and removed when Emacs exits.
