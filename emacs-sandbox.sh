@@ -178,11 +178,38 @@ title_args=(--title "Emacs (sandbox: $user_dir)")
 init_file="$user_dir/init.el"
 [[ -r $init_file ]] && load_init_file=(--load "$init_file")
 
+# Write early-init.el file if necessary.  (Emacs 27 loads packages after
+# loading early-init.el and before loading init.el, which interferes with
+# our setting user-emacs-directory at the command line, and using "-q" does
+# not disable loading of the early-init.el file, so when creating a new
+# configuration directory, we need to make an early-init.el file and set
+# these variables in it.  (See function `command-line' in "startup.el".))
+
+emacs_version=$(emacs --version | head -n1)
+[[ $emacs_version =~ ([[:digit:]]+)\.([[:digit:]]+) ]]
+emacs_major_version=${BASH_REMATCH[1]}
+debug "Emacs version: $emacs_version  Major: $emacs_major_version"
+
+if [[ $emacs_major_version -ge 27 ]]
+then
+    # Emacs before 27: check for existing early-init file.
+    early_init_file="$user_dir/early-init.el"
+    if ! [[ -e $early_init_file ]]
+    then
+        # File doesn't exist: Write one.
+        cat >"$early_init_file" <<EOF
+(setq user-emacs-directory (file-truename "$user_dir"))
+(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
+EOF
+    fi
+fi
+
 # Prepare args.
 basic_args=(
     --quick
     "${title_args[@]}"
     --eval "(setq user-emacs-directory (file-truename \"$user_dir\"))"
+    --eval "(setq package-user-dir (expand-file-name \"elpa\" user-emacs-directory))"
     --eval "(setq user-init-file (file-truename \"$init_file\"))"
     "${load_init_file[@]}"
     -l package
