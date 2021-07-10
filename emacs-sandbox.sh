@@ -183,6 +183,7 @@ basic_args=(
     --quick
     "${title_args[@]}"
     --eval "(setq user-emacs-directory (file-truename \"$user_dir\"))"
+    --eval "(setq package-user-dir (expand-file-name \"elpa\" user-emacs-directory))"
     --eval "(setq user-init-file (file-truename \"$init_file\"))"
     "${load_init_file[@]}"
     -l package
