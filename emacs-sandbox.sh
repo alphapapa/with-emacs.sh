@@ -39,6 +39,7 @@ package_refresh_args=(
     --eval "(package-refresh-contents)"
 )
 package_init_args=(
+    --eval "(setq package-user-dir (expand-file-name \"elpa\" user-emacs-directory))"
     --eval "(package-initialize)"
 )
 
@@ -174,27 +175,24 @@ fi
 # Set frame title.
 title_args=(--title "Emacs (sandbox: $user_dir)")
 
-# Make argument to load init file if it exists.
-init_file="$user_dir/init.el"
-[[ -r $init_file ]] && load_init_file=(--load "$init_file")
-
 # Prepare args.
 basic_args=(
     --quick
     "${title_args[@]}"
     --eval "(setq user-emacs-directory (file-truename \"$user_dir\"))"
-    --eval "(setq package-user-dir (expand-file-name \"elpa\" user-emacs-directory))"
-    --eval "(setq user-init-file (file-truename \"$init_file\"))"
-    "${load_init_file[@]}"
+    --eval "(setq user-init-file (expand-file-name \"init.el\" user-emacs-directory))"
+    # We load `package' here so that its symbols are defined before
+    # doing other package-related things.
     -l package
 )
 emacs_args=(
     "${basic_args[@]}"
     "${package_archives_args[@]}"
     "${org_package_archives_args[@]}"
-    "${package_refresh_args[@]}"
     "${package_init_args[@]}"
+    "${package_refresh_args[@]}"
     "${install_packages_args[@]}"
+    --eval "(when (file-exists-p user-init-file) (load-file user-init-file))"
     "${rest[@]}"
 )
 
