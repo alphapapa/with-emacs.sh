@@ -1,0 +1,15 @@
+#+TITLE: emacs-sandbox.sh notes
+
+* Ideas
+
+** TODO Set Emacs frame title
+
+* References
+
+** [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug=15539][#15539 - 24.3; setting user-emacs-directory at command line invocation - GNU bug report logs]]
+
+The concluding message:
+
+#+BEGIN_QUOTE
+So I think the conclusion to this long thread was that we don't want to add a specific switch for this, and instead people can say "XDG_CONFIG_HOME=/whatever emacs" when they want to change these paths.  So I'm closing this bug report.
+#+END_QUOTE

@@ -1,5 +1,0 @@
-#+TITLE: emacs-sandbox.sh notes
-
-* Ideas
-
-** TODO Set Emacs frame title
