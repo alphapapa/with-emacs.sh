@@ -42,6 +42,9 @@ package_init_args=(
     --eval "(setq package-user-dir (expand-file-name \"elpa\" user-emacs-directory))"
     --eval "(package-initialize)"
 )
+native_comp_args=(
+    --eval "(when (boundp 'native-comp-eln-load-path) (push (expand-file-name \"eln-cache\" user-emacs-directory) native-comp-eln-load-path))"
+)
 
 # * Functions
 
@@ -187,6 +190,7 @@ basic_args=(
 )
 emacs_args=(
     "${basic_args[@]}"
+    "${native_comp_args[@]}"
     "${package_archives_args[@]}"
     "${org_package_archives_args[@]}"
     "${package_init_args[@]}"
