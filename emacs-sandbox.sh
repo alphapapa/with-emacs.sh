@@ -46,6 +46,8 @@ native_comp_args=(
     --eval "(when (boundp 'native-comp-eln-load-path) (push (expand-file-name \"eln-cache\" user-emacs-directory) native-comp-eln-load-path))"
 )
 
+emacs="emacs"
+
 # * Functions
 
 function debug {
@@ -83,7 +85,8 @@ Options
   --          Optionally used to separate script arguments from
               Emacs arguments.
 
-  -d, --dir DIR          Use DIR as user-emacs-directory.
+  -d, --dir   DIR            Use DIR as user-emacs-directory.
+  -e, --emacs PATH           Run Emacs executable at PATH.
 
   -i, --install PACKAGE      Install PACKAGE.
   -O, --no-org-repo          Don't use the orgmode.org ELPA repo.
@@ -123,6 +126,10 @@ do
         -d|--dir)
             shift
             user_dir="$1"
+            ;;
+        -e|--emacs)
+            shift
+            emacs="$1"
             ;;
         -h|--help)
             usage
@@ -201,6 +208,6 @@ emacs_args=(
 )
 
 # Actually run Emacs.
-debug "Running: emacs ${emacs_args[@]}"
+debug "Running: $emacs ${emacs_args[@]}"
 
-emacs "${emacs_args[@]}"
+"$emacs" "${emacs_args[@]}"
