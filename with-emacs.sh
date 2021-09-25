@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# * emacs-sandbox.sh --- Run Emacs in a sandbox
+# * with-emacs.sh --- Run Emacs in a sandbox
 
-# URL: https://github.com/alphapapa/emacs-sandbox.sh
-# Version: 0.1-pre
+# URL: https://github.com/alphapapa/with-emacs.sh
+# Version: 0.1
 
 # * Commentary
 
-# Run Emacs in a sandbox.  Some code copied from MELPA's Makefile.
+# Run Emacs with arbitrary configurations, permanent or temporary.
+# Some code copied from MELPA's Makefile.
 
 # * License:
 
@@ -76,8 +77,9 @@ function usage {
     cat <<EOF
 $0 [OPTIONS] [EMACS-ARGS]
 
-Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
-specified, one is made with "mktemp -d" and removed when Emacs exits.
+Run Emacs with a specified configuration directory.  If no directory
+is specified, a temporary one is made with "mktemp -d" and removed
+when Emacs exits.
 
 Options
   --debug     Show debug information and don't remove temp directory.
@@ -183,7 +185,7 @@ else
 fi
 
 # Set frame title.
-title_args=(--title "Emacs (sandbox: $user_dir)")
+title_args=(--title "Emacs (config: $user_dir)")
 
 # Prepare args.
 basic_args=(

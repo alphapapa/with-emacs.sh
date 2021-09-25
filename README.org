@@ -1,4 +1,4 @@
-#+TITLE: emacs-sandbox.sh
+#+TITLE: with-emacs.sh
 
 #+PROPERTY: LOGGING nil
 
@@ -7,10 +7,10 @@
 This script makes it easy to run Emacs with alternative configurations (i.e. not =~/.emacs.d=).  For example, to run Emacs with a configuration stored in =~/new-emacs.d=, simply run:
 
 #+BEGIN_SRC shell
-  $ emacs-sandbox.sh --dir ~/new-emacs.d
+  $ with-emacs.sh --dir ~/new-emacs.d
 #+END_SRC
 
-It can also use temporary, "sandbox" directories that are automatically created and then removed after Emacs exits: just run =emacs-sandbox.sh= without specifying a directory.
+It can also use temporary, "sandbox" directories that are automatically created and then removed after Emacs exits: just run =with-emacs.sh= without specifying a directory.
 
 It's helpful for developing packages, troubleshooting configuration problems, trying out alternative configurations, etc.
 
@@ -27,7 +27,7 @@ It's helpful for developing packages, troubleshooting configuration problems, tr
 :TOC:      0
 :END:
 
-Copy =emacs-sandbox.sh= into your =PATH= (or don't, and run it from wherever you want).
+Copy =with-emacs.sh= into your =PATH= (or don't, and run it from wherever you want).
 
 * Usage
 :PROPERTIES:
@@ -35,10 +35,11 @@ Copy =emacs-sandbox.sh= into your =PATH= (or don't, and run it from wherever you
 :END:
 
 #+BEGIN_EXAMPLE
-  emacs-sandbox.sh [OPTIONS] [EMACS-ARGS]
+  with-emacs.sh [OPTIONS] [EMACS-ARGS]
 
-  Run Emacs in a "sandbox" user-emacs-directory.  If no directory is
-  specified, one is made with "mktemp -d" and removed when Emacs exits.
+  Run Emacs with a specified configuration directory.  If no directory
+  is specified, a temporary one is made with "mktemp -d" and removed
+  when Emacs exits.
 
   Options
     --debug     Show debug information and don't remove temp directory.
@@ -59,9 +60,9 @@ Copy =emacs-sandbox.sh= into your =PATH= (or don't, and run it from wherever you
 :TOC:      0
 :END:
 
-** 0.1-pre
+** 0.1
 
-Initial release.
+First tagged version.  Renamed from =emacs-sandbox.sh=.
 
 * Credits
 :PROPERTIES:
@@ -73,7 +74,7 @@ Inspired by and some code copied from [[https://github.com/melpa/melpa][MELPA]]'
 * Alternatives
 
 +  [[https://github.com/plexus/chemacs2][Chemacs2]] is a system of three Elisp files designed to replace your =~/.emacs.d= and switch between "profiles" stored in other directories.  It requires a configuration file pointing to the profiles' directories.  It offers some additional functionality, like setting environment variables per-profile.
-     -  In contrast, =emacs-sandbox.sh= does not replace anything, and it requires no configuration; just run it with a directory of your choice.  It's just a Bash script, so if you want to set an environment variable, use standard tools, like =env=.
+     -  In contrast, =with-emacs.sh= does not replace anything, and it requires no configuration; just run it with a directory of your choice.  It's just a Bash script, so if you want to set an environment variable, use standard tools, like =env=.
 
 * Development
 :PROPERTIES:
