@@ -212,4 +212,4 @@ emacs_args=(
 # Actually run Emacs.
 debug "Running: $emacs ${emacs_args[@]}"
 
-"$emacs" "${emacs_args[@]}"
+exec "$emacs" "${emacs_args[@]}"
