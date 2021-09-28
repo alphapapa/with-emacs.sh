@@ -3,7 +3,7 @@
 # * with-emacs.sh --- Run Emacs in a sandbox
 
 # URL: https://github.com/alphapapa/with-emacs.sh
-# Version: 0.1
+# Version: 0.1.1
 
 # * Commentary
 
@@ -116,7 +116,7 @@ function cleanup {
 
 # * Args
 
-args=$(getopt -n "$0" -o d:hi:OPR -l dir:,debug,help,install:,no-package,no-org-repo,no-refresh-packages -- "$@") || { usage; exit 1; }
+args=$(getopt -n "$0" -o d:e:hi:OPR -l dir:,debug,emacs:,help,install:,no-package,no-org-repo,no-refresh-packages -- "$@") || { usage; exit 1; }
 eval set -- "$args"
 
 while true

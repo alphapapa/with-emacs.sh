@@ -60,6 +60,11 @@ Copy =with-emacs.sh= into your =PATH= (or don't, and run it from wherever you wa
 :TOC:      0
 :END:
 
+** 0.1.1
+
+*Fixes*
++  Argument =-e= / =--emacs=.
+
 ** 0.1
 
 First tagged version.  Renamed from =emacs-sandbox.sh=.
