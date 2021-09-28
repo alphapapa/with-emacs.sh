@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # * with-emacs.sh --- Run Emacs in a sandbox
 
