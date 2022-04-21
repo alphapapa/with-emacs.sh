@@ -3,7 +3,7 @@
 # * with-emacs.sh --- Run Emacs in a sandbox
 
 # URL: https://github.com/alphapapa/with-emacs.sh
-# Version: 0.1.1
+# Version: 0.1.2
 
 # * Commentary
 
