@@ -3,7 +3,7 @@
 # * with-emacs.sh --- Run Emacs in a sandbox
 
 # URL: https://github.com/alphapapa/with-emacs.sh
-# Version: 0.1.2
+# Version: 0.1.3
 
 # * Commentary
 
@@ -192,6 +192,7 @@ basic_args=(
     --quick
     "${title_args[@]}"
     --eval "(setq user-emacs-directory (file-truename \"$user_dir\"))"
+    --eval "(setq early-init-file (expand-file-name \"early-init.el\" user-emacs-directory))"
     --eval "(setq user-init-file (expand-file-name \"init.el\" user-emacs-directory))"
     # We load `package' here so that its symbols are defined before
     # doing other package-related things.
@@ -205,6 +206,7 @@ emacs_args=(
     "${package_init_args[@]}"
     "${package_refresh_args[@]}"
     "${install_packages_args[@]}"
+    --eval "(when (file-exists-p early-init-file) (load-file early-init-file))"
     --eval "(when (file-exists-p user-init-file) (load-file user-init-file))"
     "${rest[@]}"
 )
