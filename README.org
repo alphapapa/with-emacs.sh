@@ -61,6 +61,11 @@ Copy =with-emacs.sh= into your =PATH= (or don't, and run it from wherever you wa
 :TOC:      0
 :END:
 
+** 0.2.0
+
+*Changes*
++  Enable running the ~early-init.el~ file prior to the ~init.el~ file.  (Thanks to [[https://github.com/jeffbowman][Jeff Bowman]].)
+
 ** 0.1.2
 
 *Changes*
