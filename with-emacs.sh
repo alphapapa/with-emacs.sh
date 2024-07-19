@@ -32,10 +32,6 @@ package_archives_args=(
     --eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)"
 )
 
-org_package_archives_args=(
-    --eval "(add-to-list 'package-archives '(\"org\" . \"https://orgmode.org/elpa/\") t)"
-)
-
 package_refresh_args=(
     --eval "(package-refresh-contents)"
 )
@@ -91,7 +87,6 @@ Options
   -e, --emacs PATH           Run Emacs executable at PATH.
 
   -i, --install PACKAGE      Install PACKAGE.
-  -O, --no-org-repo          Don't use the orgmode.org ELPA repo.
   -P, --no-package           Don't initialize the package system.
   -R, --no-refresh-packages  Don't refresh package lists.
 
@@ -116,7 +111,7 @@ function cleanup {
 
 # * Args
 
-args=$(getopt -n "$0" -o d:e:hi:OPR -l dir:,debug,emacs:,help,install:,no-package,no-org-repo,no-refresh-packages -- "$@") || { usage; exit 1; }
+args=$(getopt -n "$0" -o d:e:hi:PR -l dir:,debug,emacs:,help,install:,no-package,no-refresh-packages -- "$@") || { usage; exit 1; }
 eval set -- "$args"
 
 while true
@@ -140,9 +135,6 @@ do
         -i|--install)
             shift
             install_packages_args+=(--eval "(package-install '$1)")
-            ;;
-        -O|--no-org-repo)
-            unset org_package_archives_args
             ;;
         -P|--no-package)
             unset package_init_args
@@ -201,7 +193,6 @@ emacs_args=(
     "${basic_args[@]}"
     "${native_comp_args[@]}"
     "${package_archives_args[@]}"
-    "${org_package_archives_args[@]}"
     "${package_init_args[@]}"
     "${package_refresh_args[@]}"
     "${install_packages_args[@]}"

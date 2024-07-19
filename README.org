@@ -63,7 +63,8 @@ Copy =with-emacs.sh= into your =PATH= (or don't, and run it from wherever you wa
 
 ** 0.1.3-pre
 
-Nothing new yet.
+*Fixes*
++ Remove obsolete ~orgmode.org~ ELPA repo (which could cause obsolete versions of Org to be installed accidentally).
 
 ** 0.1.2
 
